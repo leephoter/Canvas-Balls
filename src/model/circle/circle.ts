@@ -20,9 +20,13 @@ export default class Circle {
       x: randomRangeInteger(this.radius, canvas.width - this.radius),
       y: randomRangeInteger(this.radius, canvas.height - this.radius),
     };
-    this.direction = {
+    const direction = {
       x: Math.cos((Math.PI / 180) * randomRangeInteger(0, 360)),
       y: Math.sin((Math.PI / 180) * randomRangeInteger(0, 360)),
+    };
+    this.direction = {
+      x: this.unitVector(direction.x, direction.y).x,
+      y: this.unitVector(direction.x, direction.y).y,
     };
   }
 
@@ -42,5 +46,13 @@ export default class Circle {
       this.point.y <= this.radius
     )
       this.direction.y = -this.direction.y; // 새로 튕기기
+  }
+
+  unitVector(x: number, y: number): { x: number; y: number } {
+    const ratio = Math.sqrt(1 / (x ** 2 + y ** 2));
+    return {
+      x: x * ratio,
+      y: y * ratio,
+    };
   }
 }
