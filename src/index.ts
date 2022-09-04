@@ -1,6 +1,7 @@
 /** @format */
 
 import { Circle } from './model/index';
+import { randomRangeInteger } from './util/index';
 
 class View {
   background() {
@@ -31,11 +32,23 @@ class View {
     context.fill();
   }
 
+  draw(canvas: HTMLCanvasElement, circles: Circle[]) {
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    circles.forEach((circle: Circle) => {
+      this.locateCircle(context, circle);
+    });
+  }
+
   run() {
     const main = this.background();
     const canvas = this.canvas();
-
-    this.locateCircle(canvas.getContext('2d'), new Circle());
+    const circlesNum = randomRangeInteger(10, 20);
+    const circles = [];
+    for (let count = 0; count < circlesNum; count++) {
+      circles.push(new Circle(canvas));
+    }
+    this.draw(canvas, circles);
     main.appendChild(canvas);
   }
 }
