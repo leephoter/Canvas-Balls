@@ -1,5 +1,9 @@
 /** @format */
 
+/** @format */
+
+import { randomRangeInteger } from '../../util/index';
+
 export default class Circle {
   radius: number;
   point: {
@@ -7,11 +11,11 @@ export default class Circle {
     y: number;
   };
 
-  constructor() {
-    this.radius = 10;
+  constructor(canvas: HTMLCanvasElement) {
+    this.radius = randomRangeInteger(10, 20);
     this.point = {
-      x: 50,
-      y: 50,
+      x: randomRangeInteger(this.radius, canvas.width - this.radius),
+      y: randomRangeInteger(this.radius, canvas.height - this.radius),
     };
   }
 }
