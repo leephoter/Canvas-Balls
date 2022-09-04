@@ -37,7 +37,9 @@ class View {
     context.clearRect(0, 0, canvas.width, canvas.height);
     circles.forEach((circle: Circle) => {
       this.locateCircle(context, circle);
+      circle.move();
     });
+    requestAnimationFrame(() => this.draw(canvas, circles));
   }
 
   run() {
