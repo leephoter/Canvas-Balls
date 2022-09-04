@@ -1,5 +1,5 @@
 /** @format */
 
-import Circle from './circle/index';
+import Circle from './circle/circle';
 
 export { Circle };

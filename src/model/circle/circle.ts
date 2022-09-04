@@ -1,7 +1,5 @@
 /** @format */
 
-/** @format */
-
 import { randomRangeInteger } from '../../util/index';
 
 export default class Circle {
