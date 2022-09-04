@@ -39,6 +39,7 @@ class View {
       this.locateCircle(context, circle);
       circle.move();
       circle.bouncingWall();
+      circle.bouncingCircle(circles);
     });
     requestAnimationFrame(() => this.draw(canvas, circles));
   }
@@ -49,7 +50,7 @@ class View {
     const circlesNum = randomRangeInteger(10, 20);
     const circles = [];
     for (let count = 0; count < circlesNum; count++) {
-      circles.push(new Circle(canvas));
+      circles.push(new Circle(count + 1, canvas));
     }
     this.draw(canvas, circles);
     main.appendChild(canvas);

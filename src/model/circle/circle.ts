@@ -9,11 +9,13 @@ interface coordinate {
 
 export default class Circle {
   canvas: HTMLCanvasElement;
+  id: number;
   radius: number;
   point: coordinate;
   direction: coordinate;
 
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(id: number, canvas: HTMLCanvasElement) {
+    this.id = id;
     this.canvas = canvas;
     this.radius = randomRangeInteger(10, 20);
     this.point = {
@@ -46,6 +48,19 @@ export default class Circle {
       this.point.y <= this.radius
     )
       this.direction.y = -this.direction.y; // 새로 튕기기
+  }
+
+  bouncingCircle(circles: Circle[]) {
+    circles.forEach((circle: Circle) => {
+      const distance = Math.sqrt(
+        (this.point.x - circle.point.x) ** 2 +
+          (this.point.y - circle.point.y) ** 2
+      );
+      const minDistance = this.radius + circle.radius;
+      if (this.id !== circle.id && distance <= minDistance) {
+        console.log(`충돌`);
+      }
+    });
   }
 
   unitVector(x: number, y: number): { x: number; y: number } {
