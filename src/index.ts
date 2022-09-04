@@ -38,6 +38,7 @@ class View {
     circles.forEach((circle: Circle) => {
       this.locateCircle(context, circle);
       circle.move();
+      circle.bouncingWall();
     });
     requestAnimationFrame(() => this.draw(canvas, circles));
   }
