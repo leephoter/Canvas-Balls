@@ -21,17 +21,20 @@
 ## 구현 방법
 ### canvas 생성
 - 가로 1000, 세로 500
+- 참고 : https://www.w3schools.com/html/html5_canvas.asp
 
 
 ### circle (공) 생성
 1. 랜덤 위치 point (x, y)
     - canvas 내부에 circle 이 생성 되려면 `radius <= x <= 1000 - radius`, `radius <= y <= 500 - radius`
 2. 고유값 id
-    - circle 끼리 부딪힐 시 주체 판단
+    - circle 끼리 부딪힐 시 주체 판단을 하기 위해 할당
 3. 랜덤 반지름 radius
     - `10 <= radius <= 20`
 4. 속도 speed
     - 200 ~ 400 px/s
+    - 이동 벡터(x, y) 의 스칼라 값이 200 ~ 400 이어야 한다
+    - 1초에 60 frame 이동 -> 200 / 60 ~ 400 / 60 px/s
 5. 방향 direction (x, y)
     - 각 1도 === pi/180 라디안
     - x: cos(pi/180 * 랜덤 각도)
@@ -46,12 +49,12 @@
 
 ### canvas 벽에 튕기기
 - 세로 벽 부딪힐 시 가로 방향 전환 
-    - `-direction(x)`
+    - 기존 방향(x)에 `-direction(x)` 할당
 - 가로 벽 부딪힐 시 세로 방향 전환 
-    - `-direction(y)`
+    - 기존 방향(y)에 `-direction(y)` 할당
 
 
-### circle 끼리 튕기기
+### circle 끼리 튕기기 - 입사각, 반사각
 ![Screen Shot 2022-09-05 at 3 51 35 PM](https://user-images.githubusercontent.com/69745441/188382956-e41640a5-a409-488c-af81-3671a110eb84.png)
 
 위 그림에서 
@@ -70,14 +73,31 @@
 
 
 ---
-## 특정 범위 내의 랜덤 정수
+## 특정 범위 내의 랜덤 정수, 실수
  - util 함수로 모듈화
-  
+ - 랜덤 정수의 circle 갯수
+    - `randomRangeInteger(min, max)`
+ - 랜덤 실수의 이동 각도, 반지름, 속도
+    - `randomRangeRealNumber(min, max)`
+
 
 ---
-## IE 지원
+## 크로스 브라우징
 ![Screen Shot 2022-09-05 at 4 59 24 PM](https://user-images.githubusercontent.com/69745441/188398674-d8afb7f9-f9e8-4405-854c-625576d5aa3e.png)
-- IE6 ~ IE8 에서 canvas 태그를 지원하지 않는다.
+<img width="855" alt="Screen Shot 2022-09-06 at 2 05 58 AM" src="https://user-images.githubusercontent.com/69745441/188493145-924727d6-ba99-40cc-9096-ea97c390fc7e.png">
+
+- 브라우저에 canvas, requestAnimationFrame, es5, es6 등 지원기능
 - Polyfill 에서 각 기능을 지원해주도록 sciprt 태그를 추가
-- https://cdn.polyfill.io/v3/url-builder/ 
+
+<img width="1552" alt="Screen Shot 2022-09-06 at 2 11 45 AM" src="https://user-images.githubusercontent.com/69745441/188493798-cd719c99-a722-4eaa-b91d-88be0b282704.png">
+
+- 지원을 원하는 기능 체크
+
+<img width="1440" alt="Screen Shot 2022-09-06 at 2 13 54 AM" src="https://user-images.githubusercontent.com/69745441/188493943-1fc78e5c-a67f-4990-ba7b-11da1207b0bf.png">
+
+- URL 복사
+- `<script src="복사된 URL"></script>` 추가
+
+- Polyfill : https://cdn.polyfill.io/v3/url-builder/ 
+- 출처 : https://caniuse.com/
 
