@@ -11,6 +11,7 @@ export default class Circle {
   canvas: HTMLCanvasElement;
   id: number;
   radius: number;
+  speed: number;
   point: coordinate;
   direction: coordinate;
 
@@ -18,6 +19,7 @@ export default class Circle {
     this.id = id;
     this.canvas = canvas;
     this.radius = randomRangeInteger(10, 20);
+    this.speed = randomRangeInteger(200, 400) / 60;
     this.point = {
       x: randomRangeInteger(this.radius, canvas.width - this.radius),
       y: randomRangeInteger(this.radius, canvas.height - this.radius),
@@ -33,8 +35,8 @@ export default class Circle {
   }
 
   move() {
-    this.point.x += this.direction.x;
-    this.point.y += this.direction.y;
+    this.point.x += this.direction.x * this.speed;
+    this.point.y += this.direction.y * this.speed;
   }
 
   bouncingWall() {
