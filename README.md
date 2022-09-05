@@ -24,27 +24,29 @@
 
 ### circle (공) 생성
 1. 랜덤 위치 point (x, y)
-  - canvas 내부에 circle 이 생성 되려면 `radius <= x <= 1000 - radius`, `radius <= y <= 500 - radius`
+    - canvas 내부에 circle 이 생성 되려면 `radius <= x <= 1000 - radius`, `radius <= y <= 500 - radius`
 2. 고유값 id
 3. 랜덤 반지름 radius
-  - `10 <= radius <= 20`
+    - `10 <= radius <= 20`
 4. 속도 speed
-  - 200 ~ 400 px/s
+    - 200 ~ 400 px/s
 5. 방향 direction (x, y)
-  - 각 1도 === pi/180 라디안
-  - x: cos(pi/180 * 랜덤 각도)
-  - y: sin(pi/180 * 랜덤 각도)
-  - 방향만 뜻해야하기 때문에 단위벡터로 각 x, y 값을 수정
+    - 각 1도 === pi/180 라디안
+    - x: cos(pi/180 * 랜덤 각도)
+    - y: sin(pi/180 * 랜덤 각도)
+    - 방향만 뜻해야하기 때문에 단위벡터로 각 x, y 값을 수정
 
 
 ### circle 이동
 - 초기 위치 (point) 에 방향 (direction) 만큼 속도를 곱해서 할당
-`point(x, y) = direction(x, y) * speed`
+    - `point(x, y) = direction(x, y) * speed`
 
 
 ### canvas 벽에 튕기기
-- 세로 벽 부딪힘 -> 가로 방향 전환 `direction(x)`
-- 가로 벽 부딪힘 -> 세로 방향 전환 `direction(y)`
+- 세로 벽 부딪힐 시 >> 가로 방향 전환 
+    - `-direction(x)`
+- 가로 벽 부딪힐 시 >> 세로 방향 전환 
+    - `-direction(y)`
 
 
 ### circle 끼리 튕기기
@@ -64,7 +66,7 @@
 - 벡터의 x, y 를 매개변수로 받아 크기(스칼라)가 1이고 방향을 뜻하는 단위벡터의 x, y 를 객체로 반환하는 매서드
 - 반환 `x = x * √(1 / x^2 + y^2)`, `y = y * √(1 / x^2 + y^2)`
 
-
+---
 ## 특정 범위 내의 랜덤 정수
  - util 함수로 모듈화
   
