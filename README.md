@@ -10,9 +10,6 @@ https://user-images.githubusercontent.com/69745441/188494603-3b2e7d87-8273-4d11-
 3. `npm run start`
 
 
-https://user-images.githubusercontent.com/69745441/188494582-40c44b84-e53b-46cd-a7c4-917f2a1d2a2e.mov
-
-
 ---
 ## 조건
 - 가로 1000, 세로 500 의 canvas
@@ -107,4 +104,11 @@ https://user-images.githubusercontent.com/69745441/188494582-40c44b84-e53b-46cd-
 
 - Polyfill : https://cdn.polyfill.io/v3/url-builder/ 
 - 출처 : https://caniuse.com/
+
+## 커밋 메시지 컨벤션
+### `작업-브랜치:작업 내용 #이슈번호`
+<img width="685" alt="Screen Shot 2022-09-06 at 2 32 28 AM" src="https://user-images.githubusercontent.com/69745441/188495747-8cc9feb7-3393-4fe0-9d73-6c0c0b6c5d7c.png">
+
+## Zenhub 이슈 관리
+ 
 
