@@ -27,14 +27,14 @@ export default class Circle {
     };
   }
 
-  unitDirection() {
+  private unitDirection() {
     return {
       x: this.unitVector(this.randomDirection().x, this.randomDirection().y).x,
       y: this.unitVector(this.randomDirection().x, this.randomDirection().y).y,
     };
   }
 
-  randomDirection() {
+  private randomDirection() {
     return {
       x: Math.cos((Math.PI / 180) * randomRangeRealNumber(0, 360)),
       y: Math.sin((Math.PI / 180) * randomRangeRealNumber(0, 360)),
@@ -45,11 +45,11 @@ export default class Circle {
     this.point.x +=
       this.direction.x *
       this.speed *
-      this.speedRatio(this.direction.x, this.direction.y);
+      this.unitRatio(this.direction.x, this.direction.y);
     this.point.y +=
       this.direction.y *
       this.speed *
-      this.speedRatio(this.direction.x, this.direction.y);
+      this.unitRatio(this.direction.x, this.direction.y);
   }
 
   bouncingWall() {
@@ -61,14 +61,14 @@ export default class Circle {
     }
   }
 
-  collisionHorizontalWall() {
+  private collisionHorizontalWall() {
     return (
       this.point.x >= this.canvas.width - this.radius ||
       this.point.x <= this.radius
     );
   }
 
-  collisionVerticalWall() {
+  private collisionVerticalWall() {
     return (
       this.point.y >= this.canvas.height - this.radius ||
       this.point.y <= this.radius
@@ -77,15 +77,15 @@ export default class Circle {
 
   bouncingCircle(circles: Circle[]) {
     circles.forEach((circle: Circle) => {
-      const distance = this.distanceCircles(circle);
+      const warnDistance = this.distanceCircles(circle);
       const minDistance = this.radius + circle.radius;
-      if (this.id !== circle.id && distance <= minDistance) {
+      if (this.id !== circle.id && warnDistance <= minDistance) {
         console.log(`충돌`);
       }
     });
   }
 
-  distanceCircles(circle: Circle) {
+  private distanceCircles(circle: Circle) {
     return Math.sqrt(
       (this.point.x - circle.point.x) ** 2 +
         (this.point.y - circle.point.y) ** 2
@@ -93,14 +93,14 @@ export default class Circle {
   }
 
   private unitVector(x: number, y: number): { x: number; y: number } {
-    const ratio = this.speedRatio(x, y);
+    const ratio = this.unitRatio(x, y);
     return {
       x: x * ratio,
       y: y * ratio,
     };
   }
 
-  private speedRatio(x: number, y: number) {
+  private unitRatio(x: number, y: number) {
     return Math.sqrt(1 / (x ** 2 + y ** 2));
   }
 }
