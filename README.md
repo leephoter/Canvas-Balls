@@ -1,10 +1,17 @@
 # WE-AR-test-v2
-## 갯수, 크기, 속도, 방향이 랜덤인 공의 물리엔진 (공의 무게, 중력 무시)
+## 갯수, 크기, 속도, 방향이 랜덤인 공의 물리엔진 (공의 무게 무시, 중력 무시, 속도 일정)
+https://user-images.githubusercontent.com/69745441/188494603-3b2e7d87-8273-4d11-a5c3-11fbce6c777d.mov
+
+
 ---
 ## 프로그램 실행 순서
 1. `npm install`
 2. `npm run bundle`
 3. `npm run start`
+
+
+https://user-images.githubusercontent.com/69745441/188494582-40c44b84-e53b-46cd-a7c4-917f2a1d2a2e.mov
+
 
 ---
 ## 조건
