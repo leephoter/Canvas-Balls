@@ -3,6 +3,6 @@
 import {
   randomRangeInteger,
   randomRangeRealNumber,
-} from './random-range-integer/randomRangeInteger';
+} from './random-range-number/randomRangeNumber';
 
 export { randomRangeInteger, randomRangeRealNumber };
