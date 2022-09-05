@@ -46,6 +46,7 @@ export default class Circle {
       this.direction.x *
       this.speed *
       this.unitRatio(this.direction.x, this.direction.y);
+
     this.point.y +=
       this.direction.y *
       this.speed *
@@ -80,9 +81,50 @@ export default class Circle {
       const warnDistance = this.distanceCircles(circle);
       const minDistance = this.radius + circle.radius;
       if (this.id !== circle.id && warnDistance <= minDistance) {
-        console.log(`충돌`);
+        this.direction = {
+          x: this.unitReflection(circle).x,
+          y: this.unitReflection(circle).y,
+        };
+        circle.direction = {
+          x: this.otherUnitReflection(circle).x,
+          y: this.otherUnitReflection(circle).y,
+        };
       }
     });
+  }
+
+  private unitReflection(circle: Circle) {
+    const diffX = this.point.x - circle.point.x;
+    const diffY = this.point.y - circle.point.y;
+    return {
+      x:
+        this.direction.x -
+        2 *
+          (this.direction.x * this.unitVector(diffX, diffY).x) *
+          this.unitVector(diffX, diffY).x,
+      y:
+        this.direction.y -
+        2 *
+          (this.direction.y * this.unitVector(diffX, diffY).y) *
+          this.unitVector(diffX, diffY).y,
+    };
+  }
+
+  private otherUnitReflection(circle: Circle) {
+    const diffX = circle.point.x - this.point.x;
+    const diffY = circle.point.y - this.point.y;
+    return {
+      x:
+        circle.direction.x -
+        2 *
+          (circle.direction.x * circle.unitVector(diffX, diffY).x) *
+          circle.unitVector(diffX, diffY).x,
+      y:
+        circle.direction.y -
+        2 *
+          (circle.direction.y * circle.unitVector(diffX, diffY).y) *
+          circle.unitVector(diffX, diffY).y,
+    };
   }
 
   private distanceCircles(circle: Circle) {
