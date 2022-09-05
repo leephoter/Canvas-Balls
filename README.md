@@ -6,8 +6,7 @@ https://user-images.githubusercontent.com/69745441/188494603-3b2e7d87-8273-4d11-
 ---
 ## 프로그램 실행 순서
 1. `npm install`
-2. `npm run bundle`
-3. `npm run start`
+2. `npm run start` or `npm start`
 
 
 https://user-images.githubusercontent.com/69745441/188494582-40c44b84-e53b-46cd-a7c4-917f2a1d2a2e.mov
