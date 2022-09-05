@@ -42,8 +42,14 @@ export default class Circle {
   }
 
   move() {
-    this.point.x += this.direction.x * this.speed;
-    this.point.y += this.direction.y * this.speed;
+    this.point.x +=
+      this.direction.x *
+      this.speed *
+      this.speedRatio(this.direction.x, this.direction.y);
+    this.point.y +=
+      this.direction.y *
+      this.speed *
+      this.speedRatio(this.direction.x, this.direction.y);
   }
 
   bouncingWall() {
@@ -86,11 +92,15 @@ export default class Circle {
     );
   }
 
-  unitVector(x: number, y: number): { x: number; y: number } {
-    const ratio = Math.sqrt(1 / (x ** 2 + y ** 2));
+  private unitVector(x: number, y: number): { x: number; y: number } {
+    const ratio = this.speedRatio(x, y);
     return {
       x: x * ratio,
       y: y * ratio,
     };
+  }
+
+  private speedRatio(x: number, y: number) {
+    return Math.sqrt(1 / (x ** 2 + y ** 2));
   }
 }
