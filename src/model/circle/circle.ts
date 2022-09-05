@@ -1,6 +1,6 @@
 /** @format */
 
-import { randomRangeInteger } from '../../util/index';
+import { randomRangeRealNumber } from '../../util/index';
 
 interface coordinate {
   x: number;
@@ -18,15 +18,15 @@ export default class Circle {
   constructor(id: number, canvas: HTMLCanvasElement) {
     this.id = id;
     this.canvas = canvas;
-    this.radius = randomRangeInteger(10, 20);
-    this.speed = randomRangeInteger(200, 400) / 60;
+    this.radius = randomRangeRealNumber(10, 20);
+    this.speed = randomRangeRealNumber(200, 400) / 60;
     this.point = {
-      x: randomRangeInteger(this.radius, canvas.width - this.radius),
-      y: randomRangeInteger(this.radius, canvas.height - this.radius),
+      x: randomRangeRealNumber(this.radius, canvas.width - this.radius),
+      y: randomRangeRealNumber(this.radius, canvas.height - this.radius),
     };
     const direction = {
-      x: Math.cos((Math.PI / 180) * randomRangeInteger(0, 360)),
-      y: Math.sin((Math.PI / 180) * randomRangeInteger(0, 360)),
+      x: Math.cos((Math.PI / 180) * randomRangeRealNumber(0, 360)),
+      y: Math.sin((Math.PI / 180) * randomRangeRealNumber(0, 360)),
     };
     this.direction = {
       x: this.unitVector(direction.x, direction.y).x,
