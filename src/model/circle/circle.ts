@@ -42,23 +42,21 @@ export default class Circle {
   }
 
   move() {
-    this.point.x +=
-      this.direction.x *
-      this.speed *
-      this.unitRatio(this.direction.x, this.direction.y);
+    const ratio =
+      this.speed * this.unitRatio(this.direction.x, this.direction.y);
 
-    this.point.y +=
-      this.direction.y *
-      this.speed *
-      this.unitRatio(this.direction.x, this.direction.y);
+    this.point.x += this.direction.x * ratio;
+    this.point.y += this.direction.y * ratio;
   }
 
   bouncingWall() {
+    const direction = this.direction;
+
     if (this.collisionHorizontalWall()) {
-      this.direction.x = -this.direction.x;
+      direction.x = -direction.x;
     }
     if (this.collisionVerticalWall()) {
-      this.direction.y = -this.direction.y;
+      direction.y = -direction.y;
     }
   }
 
@@ -96,34 +94,28 @@ export default class Circle {
   private unitReflection(circle: Circle) {
     const diffX = this.point.x - circle.point.x;
     const diffY = this.point.y - circle.point.y;
+    const normalVector = this.unitVector(diffX, diffY);
     return {
       x:
         this.direction.x -
-        2 *
-          (this.direction.x * this.unitVector(diffX, diffY).x) *
-          this.unitVector(diffX, diffY).x,
+        2 * (this.direction.x * normalVector.x) * normalVector.x,
       y:
         this.direction.y -
-        2 *
-          (this.direction.y * this.unitVector(diffX, diffY).y) *
-          this.unitVector(diffX, diffY).y,
+        2 * (this.direction.y * normalVector.y) * normalVector.y,
     };
   }
 
   private otherUnitReflection(circle: Circle) {
     const diffX = circle.point.x - this.point.x;
     const diffY = circle.point.y - this.point.y;
+    const normalVector = circle.unitVector(diffX, diffY);
     return {
       x:
         circle.direction.x -
-        2 *
-          (circle.direction.x * circle.unitVector(diffX, diffY).x) *
-          circle.unitVector(diffX, diffY).x,
+        2 * (circle.direction.x * normalVector.x) * normalVector.x,
       y:
         circle.direction.y -
-        2 *
-          (circle.direction.y * circle.unitVector(diffX, diffY).y) *
-          circle.unitVector(diffX, diffY).y,
+        2 * (circle.direction.y * normalVector.y) * normalVector.y,
     };
   }
 
