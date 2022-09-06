@@ -66,7 +66,7 @@ https://user-images.githubusercontent.com/69745441/188494603-3b2e7d87-8273-4d11-
 위 그림에서 
 - V = 이동하는 circle1 의 direction(x1, y1)
   - `(direction.x1, direction.y1)`
-- n = circle1 와 circle2 의 중점 차이 단위 벡터
+- n = circle1 와 circle2 의 중점 차이 단위 벡터 (접선의 법선 벡터의 단위 )
   - `(x1 - x2, y1 - y2)` 의 단위벡터
 
 출처 : https://ifyouwanna.tistory.com/entry/%EB%B0%98%EC%82%AC%EB%B2%A1%ED%84%B0
