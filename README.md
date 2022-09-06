@@ -1,13 +1,16 @@
 # WE-AR-test-v2
 ## 갯수, 크기, 속도, 방향이 랜덤인 공의 물리엔진 (공의 무게 무시, 중력 무시, 속도 일정)
 https://user-images.githubusercontent.com/69745441/188494603-3b2e7d87-8273-4d11-a5c3-11fbce6c777d.mov
-
+- 해결하지 못 한 버그
+    1. [ ] 일부 공끼리 부딪힐 시 바로 튕기지 않는다
+    2. [ ] 일부 공끼리 부딪힐 시 반사각이 틀리다
+    3. [ ] 일부 공끼리 부딪힐 시 공이 사라진다
+    
 
 ---
 ## 프로그램 실행 순서
 1. `npm install`
-2. `npm run bundle`
-3. `npm run start`
+2. `npm run start` or `npm start`
 
 
 ---
@@ -64,15 +67,15 @@ https://user-images.githubusercontent.com/69745441/188494603-3b2e7d87-8273-4d11-
 위 그림에서 
 - V = 이동하는 circle1 의 direction(x1, y1)
   - `(direction.x1, direction.y1)`
-- n = circle1 와 circle2 의 중점 차이 단위 벡터
+- n = circle1 와 circle2 의 중점 차이 단위 벡터 (접선의 법선 벡터의 단위 )
   - `(x1 - x2, y1 - y2)` 의 단위벡터
 
 출처 : https://ifyouwanna.tistory.com/entry/%EB%B0%98%EC%82%AC%EB%B2%A1%ED%84%B0
 
 
 ---
-## 단위벡터 unitVector(x, y) 매서드
-- 벡터의 x, y 를 매개변수로 받아 크기(스칼라)가 1이고 방향을 뜻하는 단위벡터의 x, y 를 객체로 반환하는 매서드
+## 단위벡터 unitVector(x, y)
+- 벡터의 x, y 를 매개변수로 받아 크기(스칼라)가 1이고 방향을 뜻하는 단위벡터의 x, y 를 객체로 반환
 - 반환 `x = x * √(1 / x^2 + y^2)`, `y = y * √(1 / x^2 + y^2)`
 
 
