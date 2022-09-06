@@ -13,10 +13,7 @@ export default class Circle {
   radius: number = randomRangeRealNumber(10, 20);
   speed: number = randomRangeRealNumber(200, 400) / 60;
   point: Coordinate;
-  direction: Coordinate = {
-    x: this.unitDirection().x,
-    y: this.unitDirection().y,
-  };
+  direction: Coordinate;
 
   constructor(id: number, canvas: HTMLCanvasElement) {
     this.id = id;
@@ -25,12 +22,13 @@ export default class Circle {
       x: randomRangeRealNumber(this.radius, canvas.width - this.radius),
       y: randomRangeRealNumber(this.radius, canvas.height - this.radius),
     };
+    this.direction = this.unitDirection();
   }
 
   private unitDirection() {
     return {
-      x: this.unitVector(this.randomDirection().x, this.randomDirection().y).x,
-      y: this.unitVector(this.randomDirection().x, this.randomDirection().y).y,
+      x: this.unitVector(this.randomDirection()).x,
+      y: this.unitVector(this.randomDirection()).y,
     };
   }
 
@@ -79,14 +77,8 @@ export default class Circle {
       const warnDistance = this.distanceCircles(circle);
       const minDistance = this.radius + circle.radius;
       if (this.id !== circle.id && warnDistance <= minDistance) {
-        this.direction = {
-          x: this.unitReflection(circle).x,
-          y: this.unitReflection(circle).y,
-        };
-        circle.direction = {
-          x: this.otherUnitReflection(circle).x,
-          y: this.otherUnitReflection(circle).y,
-        };
+        this.direction = this.unitReflection(circle);
+        circle.direction = this.otherUnitReflection(circle);
       }
     });
   }
@@ -94,7 +86,7 @@ export default class Circle {
   private unitReflection(circle: Circle) {
     const diffX = this.point.x - circle.point.x;
     const diffY = this.point.y - circle.point.y;
-    const normalVector = this.unitVector(diffX, diffY);
+    const normalVector = this.unitVector({ x: diffX, y: diffY });
     return {
       x:
         this.direction.x -
@@ -108,7 +100,7 @@ export default class Circle {
   private otherUnitReflection(circle: Circle) {
     const diffX = circle.point.x - this.point.x;
     const diffY = circle.point.y - this.point.y;
-    const normalVector = circle.unitVector(diffX, diffY);
+    const normalVector = circle.unitVector({ x: diffX, y: diffY });
     return {
       x:
         circle.direction.x -
@@ -126,11 +118,11 @@ export default class Circle {
     );
   }
 
-  private unitVector(x: number, y: number): { x: number; y: number } {
-    const ratio = this.unitRatio(x, y);
+  private unitVector(vector: Coordinate): { x: number; y: number } {
+    const ratio = this.unitRatio(vector.x, vector.y);
     return {
-      x: x * ratio,
-      y: y * ratio,
+      x: vector.x * ratio,
+      y: vector.y * ratio,
     };
   }
 
