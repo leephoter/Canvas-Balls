@@ -74,11 +74,24 @@ export default class Circle {
 
   bouncingCircle(circles: Circle[]) {
     circles.forEach((circle: Circle) => {
-      const warnDistance = this.distanceCircles(circle);
+      const distance = this.distanceCircles(circle);
       const minDistance = this.radius + circle.radius;
-      if (this.id !== circle.id && warnDistance <= minDistance) {
+
+      if (this.id !== circle.id && distance < minDistance) {
         this.direction = this.unitReflection(circle);
         circle.direction = this.otherUnitReflection(circle);
+
+        const overlap = minDistance - distance;
+        const reflectionRatio = overlap / 2; // 원의 중심을 반씩 이동
+
+        const xDistance = (this.point.x - circle.point.x) / distance;
+        const yDistance = (this.point.y - circle.point.y) / distance;
+
+        this.point.x += xDistance * reflectionRatio;
+        this.point.y += yDistance * reflectionRatio;
+
+        circle.point.x -= xDistance * reflectionRatio;
+        circle.point.y -= yDistance * reflectionRatio;
       }
     });
   }
