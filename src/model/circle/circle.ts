@@ -50,11 +50,21 @@ export default class Circle {
   bouncingWall() {
     const direction = this.direction;
 
-    if (this.collisionHorizontalWall()) {
-      direction.x = -direction.x;
+    if (this.point.x >= this.canvas.width - this.radius) {
+      direction.x = -Math.abs(direction.x);
+      this.point.x = this.canvas.width - this.radius;
     }
-    if (this.collisionVerticalWall()) {
-      direction.y = -direction.y;
+    if (this.point.x <= this.radius) {
+      direction.x = Math.abs(direction.x);
+      this.point.x = this.radius;
+    }
+    if (this.point.y >= this.canvas.height - this.radius) {
+      direction.y = -Math.abs(direction.y);
+      this.point.y = this.canvas.height - this.radius;
+    }
+    if (this.point.y <= this.radius) {
+      direction.y = Math.abs(direction.y);
+      this.point.y = this.radius;
     }
   }
 
