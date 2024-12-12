@@ -87,27 +87,27 @@ export default class Circle {
     const diffX = this.point.x - circle.point.x;
     const diffY = this.point.y - circle.point.y;
     const normalVector = this.unitVector({ x: diffX, y: diffY });
+
+    const dotProduct =
+      this.direction.x * normalVector.x + this.direction.y * normalVector.y;
+
     return {
-      x:
-        this.direction.x -
-        2 * (this.direction.x * normalVector.x) * normalVector.x,
-      y:
-        this.direction.y -
-        2 * (this.direction.y * normalVector.y) * normalVector.y,
+      x: this.direction.x - 2 * dotProduct * normalVector.x,
+      y: this.direction.y - 2 * dotProduct * normalVector.y,
     };
   }
 
   private otherUnitReflection(circle: Circle) {
     const diffX = circle.point.x - this.point.x;
     const diffY = circle.point.y - this.point.y;
-    const normalVector = circle.unitVector({ x: diffX, y: diffY });
+    const normalVector = this.unitVector({ x: diffX, y: diffY });
+
+    const dotProduct =
+      circle.direction.x * normalVector.x + circle.direction.y * normalVector.y;
+
     return {
-      x:
-        circle.direction.x -
-        2 * (circle.direction.x * normalVector.x) * normalVector.x,
-      y:
-        circle.direction.y -
-        2 * (circle.direction.y * normalVector.y) * normalVector.y,
+      x: circle.direction.x - 2 * dotProduct * normalVector.x,
+      y: circle.direction.y - 2 * dotProduct * normalVector.y,
     };
   }
 
